@@ -10,7 +10,7 @@ public class Airport {
     private String name;
     private String location;
 
-    // Getters y Setters
+
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
 
