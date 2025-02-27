@@ -10,7 +10,7 @@ public class Passenger {
     private String name;
     private String passportNumber;
 
-    // Getters y Setters
+
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
 
