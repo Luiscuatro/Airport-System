@@ -2,6 +2,10 @@ package com.airport.airport.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Passenger {
@@ -9,6 +13,10 @@ public class Passenger {
     private String id;
     private String name;
     private String passportNumber;
+
+    @ManyToMany(mappedBy = "passengers")
+    private Set<Plane> planes = new HashSet<>();
+
 
 
     public String getId() { return id; }
@@ -19,4 +27,12 @@ public class Passenger {
 
     public String getPassportNumber() { return passportNumber; }
     public void setPassportNumber(String passportNumber) { this.passportNumber = passportNumber; }
+
+    public Set<Plane> getPlanes() {
+        return planes;
+    }
+    public void setPlanes(Set<Plane> planes) {
+        this.planes = planes;
+    }
+
 }

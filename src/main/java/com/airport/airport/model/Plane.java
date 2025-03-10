@@ -16,8 +16,14 @@ public class Plane {
     @JoinColumn(name = "CURRENT_AIRPORT_FK")
     private Airport current_airport;
 
-    @ManyToMany(mappedBy = "planes")
+    @ManyToMany
+    @JoinTable(
+            name = "ticket",
+            joinColumns = @JoinColumn(name = "plane_id"),
+            inverseJoinColumns = @JoinColumn(name = "passenger_id")
+    )
     private Set<Passenger> passengers = new HashSet<>();
+
 
 
 
