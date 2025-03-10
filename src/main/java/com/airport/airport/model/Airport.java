@@ -3,6 +3,7 @@ package com.airport.airport.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -14,6 +15,15 @@ public class Airport {
 
     @OneToMany(mappedBy = "current_airport")
     private Set<Plane> planes;
+
+    @ManyToMany
+    @JoinTable(
+            name = "airport_passenger",
+            joinColumns = @JoinColumn(name = "airport_id"),
+            inverseJoinColumns = @JoinColumn(name = "passenger_id")
+    )
+    private Set<Passenger> passengers = new HashSet<>();
+
 
 
     public String getId() { return id; }
@@ -31,5 +41,13 @@ public class Airport {
 
     public void setPlanes(Set<Plane> planes) {
         this.planes = planes;
+    }
+
+    public Set<Passenger> getPassengers() {
+        return passengers;
+    }
+
+    public void setPassengers(Set<Passenger> passengers) {
+        this.passengers = passengers;
     }
 }
