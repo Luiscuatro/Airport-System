@@ -4,8 +4,8 @@ import com.airport.airport.model.Airport;
 import com.airport.airport.repository.AirportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AirportService {
@@ -16,8 +16,8 @@ public class AirportService {
         return airportRepository.findAll();
     }
 
-    public Optional<Airport> getAirportById(String id) {
-        return airportRepository.findById(id);
+    public Airport getAirportById(String id) {
+        return airportRepository.findById(id).orElse(null);
     }
 
     public Airport saveAirport(Airport airport) {
@@ -26,5 +26,14 @@ public class AirportService {
 
     public void deleteAirport(String id) {
         airportRepository.deleteById(id);
+    }
+
+    public boolean existsById(String id) {
+        return !airportRepository.existsById(id);
+    }
+
+    public Airport updateAirport(String id, Airport airportDetails) {
+        airportDetails.setId(id);
+        return airportRepository.save(airportDetails);
     }
 }
