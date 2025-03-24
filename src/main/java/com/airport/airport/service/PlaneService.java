@@ -4,11 +4,13 @@ import com.airport.airport.model.Plane;
 import com.airport.airport.repository.PlaneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class PlaneService {
+
     @Autowired
     private PlaneRepository planeRepository;
 
@@ -24,7 +26,12 @@ public class PlaneService {
         return planeRepository.save(plane);
     }
 
-    public void deletePlane(String id) {
-        planeRepository.deleteById(id);
+    public boolean deletePlane(String id) {
+        if (planeRepository.existsById(id)) {
+            planeRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
     }
 }
