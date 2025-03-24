@@ -1,11 +1,25 @@
 package com.airport.airport.model;
 
 import jakarta.persistence.*;
+import lombok.*;
+
+import java.time.LocalDateTime;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Ticket {
+
     @Id
     private String id;
+
+    private String seatNumber;
+    private String flightNumber;
+    private LocalDateTime departureTime;
+    private LocalDateTime arrivalTime;
+    private String gate;
+    private String boardingGroup;
 
     @ManyToOne
     @JoinColumn(name = "passenger_id")
@@ -14,13 +28,4 @@ public class Ticket {
     @ManyToOne
     @JoinColumn(name = "plane_id")
     private Plane plane;
-
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
-
-    public Passenger getPassenger() { return passenger; }
-    public void setPassenger(Passenger passenger) { this.passenger = passenger; }
-
-    public Plane getPlane() { return plane; }
-    public void setPlane(Plane plane) { this.plane = plane; }
 }
