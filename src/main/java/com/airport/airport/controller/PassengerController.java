@@ -3,10 +3,10 @@ package com.airport.airport.controller;
 import com.airport.airport.model.Passenger;
 import com.airport.airport.service.PassengerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/passengers")
@@ -16,23 +16,37 @@ public class PassengerController {
     private PassengerService passengerService;
 
     @GetMapping
-    public List<Passenger> getAllPassengers() {
-        return passengerService.getAllPassengers();
+    public ResponseEntity<List<Passenger>> getAllPassengers() {
+        return ResponseEntity.ok(passengerService.getAllPassengers());
     }
 
     @GetMapping("/{id}")
-    public Passenger getPassengerById(@PathVariable String id) {
-        return passengerService.getPassengerById(id).orElse(null);
+    public ResponseEntity<Passenger> getPassengerById(@PathVariable String id) {
+        if (!passengerService.ExistsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(passengerService.getPassengerById(id));
     }
 
     @PostMapping
-    public Passenger createPassenger(@RequestBody Passenger passenger) {
-        return passengerService.savePassenger(passenger);
+    public ResponseEntity<Passenger> createPassenger(@RequestBody Passenger passenger) {
+        return ResponseEntity.ok(passengerService.savePassenger(passenger));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Passenger> updatePassenger(@PathVariable String id, @RequestBody Passenger passenger) {
+        if (!passengerService.ExistsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(passengerService.updatePassenger(id, passenger));
     }
 
     @DeleteMapping("/{id}")
-    public String deletePassenger(@PathVariable String id) {
+    public ResponseEntity<String> deletePassenger(@PathVariable String id) {
+        if (!passengerService.ExistsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
         passengerService.deletePassenger(id);
-        return "Passenger deleted";
+        return ResponseEntity.ok("Passenger deleted");
     }
 }

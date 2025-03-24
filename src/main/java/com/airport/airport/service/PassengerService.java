@@ -4,8 +4,8 @@ import com.airport.airport.model.Passenger;
 import com.airport.airport.repository.PassengerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PassengerService {
@@ -16,8 +16,8 @@ public class PassengerService {
         return passengerRepository.findAll();
     }
 
-    public Optional<Passenger> getPassengerById(String id) {
-        return passengerRepository.findById(id);
+    public Passenger getPassengerById(String id) {
+        return passengerRepository.findById(id).orElse(null);
     }
 
     public Passenger savePassenger(Passenger passenger) {
@@ -26,5 +26,14 @@ public class PassengerService {
 
     public void deletePassenger(String id) {
         passengerRepository.deleteById(id);
+    }
+
+    public boolean ExistsById(String id) {
+        return passengerRepository.existsById(id);
+    }
+
+    public Passenger updatePassenger(String id, Passenger passengerDetails) {
+        passengerDetails.setId(id);
+        return passengerRepository.save(passengerDetails);
     }
 }

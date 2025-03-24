@@ -28,7 +28,7 @@ public class AirportService {
         airportRepository.deleteById(id);
     }
 
-    public boolean existsById(String id) {
+    public boolean ExistsById(String id) {
         return !airportRepository.existsById(id);
     }
 
