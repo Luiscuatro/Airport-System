@@ -1,50 +1,31 @@
 package com.airport.airport.model;
 
 import jakarta.persistence.*;
+import lombok.*;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Plane {
+
     @Id
     private String id;
+
     private String model;
     private int capacity;
-
-    @ManyToOne
-    @JoinColumn(name = "CURRENT_AIRPORT_FK")
-    private Airport current_airport;
+    private String manufacturer;
+    private int year;
+    private String status;
+    private int rangeKm;
 
     @ManyToMany
     @JoinTable(
-            name = "ticket",
+            name = "plane_airport",
             joinColumns = @JoinColumn(name = "plane_id"),
-            inverseJoinColumns = @JoinColumn(name = "passenger_id")
+            inverseJoinColumns = @JoinColumn(name = "airport_id")
     )
-    private Set<Passenger> passengers = new HashSet<>();
-
-
-
-
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
-
-    public String getModel() { return model; }
-    public void setModel(String model) { this.model = model; }
-
-    public int getCapacity() { return capacity; }
-    public void setCapacity(int capacity) { this.capacity = capacity; }
-
-    public Airport getAirport() {
-        return current_airport;
-    }
-
-    public void setAirport(Airport airport) {
-        this.current_airport = airport;
-    }
-
-    public Set<Passenger> getPassengers() { return passengers; }
-    public void setPassengers(Set<Passenger> passengers) { this.passengers = passengers; }
-
+    private List<Airport> airports;
 }
