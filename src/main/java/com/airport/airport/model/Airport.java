@@ -3,6 +3,7 @@ package com.airport.airport.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,7 +15,10 @@ import java.util.Set;
 public class Airport {
 
     @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
+
 
     private String name;
     private String location;
@@ -27,11 +31,12 @@ public class Airport {
     private Set<Plane> planes = new HashSet<>();
 
     @ManyToMany
+    @JsonIgnore
     @JoinTable(
             name = "airport_passenger",
             joinColumns = @JoinColumn(name = "airport_id"),
             inverseJoinColumns = @JoinColumn(name = "passenger_id")
     )
-    @JsonIgnore
+
     private Set<Passenger> passengers = new HashSet<>();
 }

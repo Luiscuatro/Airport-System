@@ -22,7 +22,7 @@ public class AirportController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Airport> getAirportById(@PathVariable String id) {
-        if (airportService.ExistsById(id)) {
+        if (airportService.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(airportService.getAirportById(id));
@@ -35,7 +35,7 @@ public class AirportController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Airport> updateAirport(@PathVariable String id, @RequestBody Airport airport) {
-        if (airportService.ExistsById(id)) {
+        if (airportService.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(airportService.updateAirport(id, airport));
@@ -43,7 +43,7 @@ public class AirportController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteAirport(@PathVariable String id) {
-        if (airportService.ExistsById(id)) {
+        if (airportService.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
         airportService.deleteAirport(id);

@@ -28,9 +28,10 @@ public class AirportService {
         airportRepository.deleteById(id);
     }
 
-    public boolean ExistsById(String id) {
-        return !airportRepository.existsById(id);
+    public boolean existsById(String id) {
+        return airportRepository.existsById(id);
     }
+
 
     public Airport updateAirport(String id, Airport airportDetails) {
         airportDetails.setId(id);

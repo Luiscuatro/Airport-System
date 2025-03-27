@@ -28,7 +28,7 @@ public class PassengerService {
         passengerRepository.deleteById(id);
     }
 
-    public boolean ExistsById(String id) {
+    public boolean existsById(String id) {
         return passengerRepository.existsById(id);
     }
 

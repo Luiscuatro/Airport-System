@@ -22,7 +22,7 @@ public class PassengerController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Passenger> getPassengerById(@PathVariable String id) {
-        if (!passengerService.ExistsById(id)) {
+        if (!passengerService.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(passengerService.getPassengerById(id));
@@ -35,7 +35,7 @@ public class PassengerController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Passenger> updatePassenger(@PathVariable String id, @RequestBody Passenger passenger) {
-        if (!passengerService.ExistsById(id)) {
+        if (!passengerService.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(passengerService.updatePassenger(id, passenger));
@@ -43,7 +43,7 @@ public class PassengerController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletePassenger(@PathVariable String id) {
-        if (!passengerService.ExistsById(id)) {
+        if (!passengerService.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
         passengerService.deletePassenger(id);
