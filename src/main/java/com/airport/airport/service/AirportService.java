@@ -33,8 +33,8 @@ public class AirportService {
     }
 
 
-    public Airport updateAirport(String id, Airport airportDetails) {
-        airportDetails.setId(id);
-        return airportRepository.save(airportDetails);
+    public Airport updateAirport(Airport airport) {
+        return airportRepository.save(airport);
     }
+
 }

@@ -33,13 +33,14 @@ public class PassengerController {
         return ResponseEntity.ok(passengerService.savePassenger(passenger));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Passenger> updatePassenger(@PathVariable String id, @RequestBody Passenger passenger) {
-        if (!passengerService.existsById(id)) {
+    @PutMapping
+    public ResponseEntity<Passenger> updatePassenger(@RequestBody Passenger passenger) {
+        if (!passengerService.existsById(passenger.getId())) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(passengerService.updatePassenger(id, passenger));
+        return ResponseEntity.ok(passengerService.updatePassenger(passenger));
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletePassenger(@PathVariable String id) {

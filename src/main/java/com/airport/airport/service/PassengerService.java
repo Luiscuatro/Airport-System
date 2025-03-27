@@ -32,8 +32,8 @@ public class PassengerService {
         return passengerRepository.existsById(id);
     }
 
-    public Passenger updatePassenger(String id, Passenger passengerDetails) {
-        passengerDetails.setId(id);
-        return passengerRepository.save(passengerDetails);
+    public Passenger updatePassenger(Passenger passenger) {
+        return passengerRepository.save(passenger);
     }
+
 }

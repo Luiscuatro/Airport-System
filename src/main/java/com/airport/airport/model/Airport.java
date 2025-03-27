@@ -19,7 +19,6 @@ public class Airport {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
 
-
     private String name;
     private String location;
     private String city;

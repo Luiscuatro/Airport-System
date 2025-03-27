@@ -33,13 +33,14 @@ public class AirportController {
         return ResponseEntity.ok(airportService.saveAirport(airport));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Airport> updateAirport(@PathVariable String id, @RequestBody Airport airport) {
-        if (airportService.existsById(id)) {
+    @PutMapping
+    public ResponseEntity<Airport> updateAirport(@RequestBody Airport airport) {
+        if (!airportService.existsById(airport.getId())) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(airportService.updateAirport(id, airport));
+        return ResponseEntity.ok(airportService.updateAirport(airport));
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteAirport(@PathVariable String id) {
