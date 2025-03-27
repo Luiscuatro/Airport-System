@@ -24,10 +24,14 @@ public class Ticket {
     private String gate;
     private String boardingGroup;
 
+    @Getter
+    @Setter
     @ManyToOne
     @JoinColumn(name = "passenger_id")
     private Passenger passenger;
 
+    @Getter
+    @Setter
     @ManyToOne
     @JoinColumn(name = "plane_id")
     private Plane plane;

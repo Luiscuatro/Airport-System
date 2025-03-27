@@ -25,10 +25,14 @@ public class Airport {
     private String country;
     private String code;
 
+    @Getter
+    @Setter
     @OneToMany(mappedBy = "current_airport")
     @JsonIgnore
     private Set<Plane> planes = new HashSet<>();
 
+    @Getter
+    @Setter
     @ManyToMany
     @JsonIgnore
     @JoinTable(

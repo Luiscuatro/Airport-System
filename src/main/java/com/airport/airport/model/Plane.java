@@ -24,6 +24,8 @@ public class Plane {
     private String status;
     private int rangeKm;
 
+    @Getter
+    @Setter
     @ManyToMany
     @JoinTable(
             name = "plane_airport",

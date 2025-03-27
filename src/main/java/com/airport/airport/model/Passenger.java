@@ -27,6 +27,8 @@ public class Passenger {
     private LocalDate birthDate;
     private String gender;
 
+    @Getter
+    @Setter
     @ManyToMany(mappedBy = "passengers")
     private Set<Plane> planes = new HashSet<>();
 }
