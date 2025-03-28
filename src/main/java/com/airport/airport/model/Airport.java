@@ -27,12 +27,6 @@ public class Airport {
 
     @Getter
     @Setter
-    @OneToMany(mappedBy = "current_airport")
-    @JsonIgnore
-    private Set<Plane> planes = new HashSet<>();
-
-    @Getter
-    @Setter
     @ManyToMany
     @JsonIgnore
     @JoinTable(

@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -23,6 +25,15 @@ public class Plane {
     private int year;
     private String status;
     private int rangeKm;
+
+
+    @ManyToMany
+    @JoinTable(
+            name = "plane_passenger",
+            joinColumns = @JoinColumn(name = "plane_id"),
+            inverseJoinColumns = @JoinColumn(name = "passenger_id")
+    )
+    private Set<Passenger> passengers = new HashSet<>();
 
     @Getter
     @Setter
